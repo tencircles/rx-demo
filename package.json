@@ -63,6 +63,7 @@
     "scripts": {
         "start": "node scripts/start.js",
         "build": "node scripts/build.js",
+        "deploy": "rsync -rave 'ssh -i ~/.ssh/thetenthring.com/deploy_rsa' build/ root@165.227.17.140:/var/www/html/rxd",
         "test": "exit 0"
     },
     "browserslist": {

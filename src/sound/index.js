@@ -9,7 +9,7 @@ const map = {
         track.stems.forEach(stem => {
             if (stem !== "off") {
                 keys.push(stem);
-                acc[stem] = `/audio/${stem}.mp3`;
+                acc[stem] = `${process.env.PUBLIC_URL}/audio/${stem}.mp3`;
             }
         });
         return acc;
