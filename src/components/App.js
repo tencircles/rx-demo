@@ -1,35 +1,22 @@
 import React from "react";
-import Tracks from "./Tracks"
 import Header from "./Header";
-import store from "../store";
-import {useStore, StoreProvider} from "easy-peasy";
-/*
+import Main from "./Main";
+import About from "./About";
+import {useStoreActions, useStoreState} from "easy-peasy";
 
-    - randomizer buttons selects random combination of tracks
-    - selection allows you to cusomize
-*/
+const Screens = {
+    "/"      : Main,
+    "/about" : About
+};
 
-function App (props) {
-    const tracks = useStore(state => state.tracks);
-    const activeTrack = useStore(state => state.activeTrack);
+export default props => {
+    const set    = useStoreActions(actions => actions.setActiveTrack);
+    const screen = useStoreState(state => state.screen);
+
     return (
-        <div className="app">
+        <div className="app" onClick={e => set(-1)}>
             <Header />
-            <div className="main">
-                <Tracks tracks={tracks} activeTrack={activeTrack} />
-                <button className="randomize"></button>
-            </div>
+            {React.createElement(Screens[screen])}
         </div>
     );
-}
-
-function WithStore (props) {
-    return (
-        <StoreProvider store={store}>
-            <App />
-        </StoreProvider>
-    );
-}
-
-
-export default WithStore;
+};

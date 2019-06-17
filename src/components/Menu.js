@@ -1,7 +1,11 @@
 import React from "react";
+import {useStoreActions} from 'easy-peasy';
 
-export default () => (
-    <div className="menu">
-        <a onClick={e => e.preventDefault()}href="/info" className="menu-link">About</a>
-    </div>
-);
+export default () => {
+    const setScreen = useStoreActions(actions => actions.updateScreen);
+    return (
+        <div className="menu">
+            <button onClick={() => setScreen("/about")} className="menu-link">About</button>
+        </div>
+    );
+};

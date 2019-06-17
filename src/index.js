@@ -2,14 +2,20 @@ import "./styles/index.scss";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import * as serviceWorker from "./serviceWorker";
+import {StoreProvider} from "easy-peasy";
+import store from "./store";
+import sound from "./sound";
+import {register} from "./serviceWorker";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const root = document.getElementById("root");
+const jsx  = (
+    <StoreProvider store={store}>
+        <App />
+    </StoreProvider>
+);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+window.store = store;
+window.addEventListener("contextmenu", e => e.preventDefault());
+ReactDOM.render(jsx, root);
 
-window.addEventListener("contextmenu", e =>
-    e.preventDefault());
+register();

@@ -1,0 +1,19 @@
+@mixin base-transition {
+    transition: all 250ms ease-in-out;
+}
+
+@mixin glow-text-1 {
+    text-shadow: 0px 0px 2px white;
+}
+
+@mixin glow-text-2 {
+    text-shadow: 0px 0px 5px white;
+}
+/* offset-x | offset-y | blur-radius | spread-radius | color */
+@mixin glow-box-1 {
+    box-shadow: 0px 0px 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+@mixin glow-box-2 {
+    box-shadow: 0px 0px 2px 2px white;
+}
