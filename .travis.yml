@@ -5,8 +5,7 @@ branches:
   only:
   - master
 addons:
-  ssh_known_hosts:
-  - 165.227.17.140
+  ssh_known_hosts: 165.227.17.140
 before_install:
 - sudo apt-get update -qq
 install:
