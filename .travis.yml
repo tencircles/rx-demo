@@ -3,7 +3,7 @@ node_js:
 - 11.4
 branches:
   only:
-  - master
+    - master
 addons:
   ssh_known_hosts:
   - 165.227.17.140
