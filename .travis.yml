@@ -20,6 +20,6 @@ before-deploy:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/ $SSH_SERVER:$SSH_PROJECT_PATH
+  script: rsync -e "ssh -i /tmp/deploy_rsa" -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/ $SSH_SERVER:$SSH_PROJECT_PATH
   on:
     branch: master
