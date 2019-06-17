@@ -9,7 +9,7 @@ addons:
   - 165.227.17.140
 - sudo apt-get update -qq
 install:
-- npm install
+- npm ci
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_36278caba543_key -iv $encrypted_36278caba543_iv
   -in deploy_rsa.enc -out deploy_rsa -d
