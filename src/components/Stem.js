@@ -1,9 +1,9 @@
 import React from "react";
 
-export default props => {
-    return (
-        <div className="stem">
-            {props.index > 0 ? props.index : "∅"}
-        </div>
-    );
-};
+export default props => (
+    <div className="stem">
+        <span className="stem-number">
+            {props.index > 0 ? props.index : `∅`}
+        </span>
+    </div>
+);

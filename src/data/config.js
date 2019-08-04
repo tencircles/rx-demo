@@ -1,8 +1,8 @@
 export default {
     instruments : [
-        "drums",
-        "chords",
-        "melody"
+        `drums`,
+        `chords`,
+        `melody`
     ],
     noStems : 5
 };

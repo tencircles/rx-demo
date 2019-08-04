@@ -82,5 +82,8 @@
         "presets": [
             "react-app"
         ]
+    },
+    "devDependencies": {
+        "eslint-plugin-align-assignments": "^1.0.0"
     }
 }

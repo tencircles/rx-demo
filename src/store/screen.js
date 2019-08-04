@@ -1,7 +1,7 @@
 import {action} from "easy-peasy";
 
 export default {
-    screen       : "/",
+    screen       : `/`,
     updateScreen : action((state, screen) => {
         state.screen = screen;
     })

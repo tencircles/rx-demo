@@ -1,62 +1,54 @@
-import React, {useRef, useEffect, useState} from "react";
+import React, {useRef, useEffect, useState, useCallback} from "react";
 import {useStoreActions, useStoreState} from "easy-peasy";
 import Stem from "./Stem";
 import anime from "animejs";
 
-const ifString = string => bool =>
-    bool ? string : "";
-
-const ifActive = ifString("active");
-const ifUp     = ifString("up");
-const ifDown   = ifString("down");
-
 export default props => {
-    const setTrack   = useStoreActions(actions => actions.setActiveTrack);
-    const setStem    = useStoreActions(actions => actions.setActiveStem);
-    const className  = `track ${ifActive(props.active)} ${ifUp(props.activeStem > 0)} ${ifDown(props.activeStem < props.stems.length - 1)}`;
-    const stemsEl    = useRef();
-
-    useEffect(() => {
-        if (props.active) {
-            return;
-        }
+    const setTrack     = useStoreActions(actions => actions.setActiveTrack);
+    const setStem      = useStoreActions(actions => actions.setActiveStem);
+    const setAnimating = useStoreActions(actions => actions.setAnimating);
+    const isAnimating  = useStoreState(state => state.animating);
+    const stemsEl      = useRef();
+    /* const onScroll     = useCallback(e => {
+        const track   = props.index;
         const segment = stemsEl.current.scrollHeight / props.stems.length;
-        const toPx    = parseInt(segment * props.activeStem);
-        const state   = {y: stemsEl.current.scrollTop};
-        const animRef = anime({
-            targets  : state,
-            y        : toPx,
-            duration : 1000,
-            update   : () => {
-                stemsEl.current.scrollTo(0, state.y);
-            }
-        });
-
-        return () => {
-            stemsEl.current.classList.remove("animating");
-            animRef.pause();
-        };
-    }, [props.activeStem]);
-
-    const onScroll   = e => {
-        const track = props.index;
-        const segment = stemsEl.current.scrollHeight / props.stems.length;
-        const stem    = parseInt(Math.round(stemsEl.current.scrollTop / segment));
+        const stem    = parseInt(Math.round(stemsEl.current.scrollTop / segment), 10);
 
         if (stem !== props.activeStem) {
             setStem({track, stem});
         }
-    };
+    }, [props.index]); */
+
+    useEffect(() => {
+        let animRef = null;
+        if (isAnimating) {
+            console.log(props.index, `animating`);
+            const segment = stemsEl.current.scrollHeight / props.stems.length;
+            const toPx    = parseInt(segment * props.activeStem, 10);
+            animRef       = anime({
+                targets   : stemsEl.current,
+                scrollTop : toPx,
+                duration  : 1000,
+                complete () {
+                    console.log(`removed active`);
+                    /* stemsEl.current.classList.remove(`active`); */
+                    setAnimating(false);
+                }
+            });
+            /* stemsEl.current.classList.add(`active`); */
+        }
+
+        return () => {
+            if (animRef) {
+                console.log(`was killed`);
+                /* stemsEl.current.classList.remove(`active`); */
+                animRef.pause();
+            }
+        };
+    }, [props.activeStem]);
 
     return (
-        <div
-            className={className}
-            onClick={e => {
-                setTrack(props.active ? -1 : props.index);
-                e.stopPropagation();
-            }}
-            onScroll={onScroll}
-        >
+        <div className="track">
             <div className="stems" ref={stemsEl}>
                 {props.stems.map((stem, i) => (
                     <Stem

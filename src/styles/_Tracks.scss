@@ -2,20 +2,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: $gutter 0;
+    padding-top: 2vh;
 
     .track {
         display: block;
         margin: 0.5rem;
-        border: 1px solid $primary-color;
+        border: 1.5px solid $primary-color1;
+        border-radius: 5px;
         width: 5rem;
         height: 9rem;
-        transition: all 0.25s linear;
+        transition: all $transition-time linear;
         position: relative;
+        transform: scale(0.95);
 
         &.active {
-            border: 1px solid $secondary-color;
-
+            transform: scale(1);
+            border: 2.5px solid $secondary-color;
             .stem {
                 color: $secondary-color;
             }
@@ -61,23 +63,42 @@
             &::-webkit-scrollbar {
                 display: none;
             }
-            overflow-y: auto;
-            scroll-snap-type: mandatory;
-            scroll-snap-points-y: repeat(7rem);
+            overflow-x: hidden;
+            overflow-y: scroll;
+
             scroll-snap-type: y mandatory;
+            scroll-snap-points-y: repeat(7rem);
+
+            -webkit-overflow-scrolling: touch;
+            -webkit-scroll-snap-type: y mandatory;
+            -webkit-scroll-snap-points-y: repeat(7rem);
+            &.active {
+                scroll-snap-type: none;
+                scroll-snap-points-y: none;
+                -webkit-scroll-snap-type: none;
+                -webkit-scroll-snap-points-y: none;
+            }
             width: 100%;
             height: 100%;
         }
 
         .stem {
+            user-select: none;
             scroll-snap-align: start;
             width: 100%;
             height: 100%;
-            color: $primary-color;
-            font-size: 7rem;
-            text-align: center;
-            vertical-align: middle;
-            font-family: $mono-font;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            -webkit-scroll-snap-coordinate: 0% 0%;
+            .stem-number {
+                display: inline-block;
+                font-size: 5rem;
+                color: $primary-color;
+                font-family: $mono-font;
+            }
         }
     }
 }

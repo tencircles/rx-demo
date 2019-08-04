@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useStoreState, useStoreActions} from "easy-peasy";
 import Track from "./Track";
+import anime from "animejs";
 
 export default props => {
-    const tracks      = useStoreState(state => state.tracks);
-    const activeTrack = useStoreState(state => state.activeTrack);
+    const tracks       = useStoreState(state => state.tracks);
+    const activeTrack  = useStoreState(state => state.activeTrack);
+    const isAnimating  = useStoreState(state => state.animating);
+    const setAnimating = useStoreActions(actions => actions.setAnimating);
 
     return (
         <div

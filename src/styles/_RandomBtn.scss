@@ -1,12 +1,11 @@
 .randomize-btn {
     width: 90px;
     height: 90px;
-    background: $bg-color;
     border: 3px solid $primary-color;
     position: relative;
     border-radius: 100%;
     transition: all 0.5s linear;
-
+    background-color: transparent;
     &:after {
         content: "";
         position: absolute;
@@ -16,8 +15,9 @@
         width: calc(100% - 6px);
         height: calc(100% - 6px);
         border-radius: 100%;
+        background-color: transparent;
         background-color: $primary-color;
-        background-image: url("/image/random.png");
+        background-image: url("https://thetenthring.com/rxd/image/random.png");
         background-size: 80%;
         background-repeat: no-repeat;
         background-position: 68% center;

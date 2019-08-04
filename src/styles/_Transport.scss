@@ -3,7 +3,9 @@
     height: $size * 0.74;
     width: 100%;
     max-width: 640px;
-    padding: 0 2rem;
+    padding: 4rem 0;
+    /* align-self: flex-end; */
+    /* margin-top: auto; */
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
