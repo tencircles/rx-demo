@@ -49,15 +49,16 @@ store.getState().tracks.forEach((track, i) => {
     });
 });
 
+Tone.Master.volume.value = MIN_VOL;
 listen(`playing`, isPlaying => {
     if (isPlaying) {
-        Tone.Master.volume.value = MAX_VOL;
+        Tone.Master.volume.rampTo(MAX_VOL, FADE_S);
         stems.forEach(key => {
             players.get(key).start(0);
         });
         players.get(`vocals`).start(0);
     } else {
-        Tone.Master.volume.value = MIN_VOL;
+        Tone.Master.volume.rampTo(MIN_VOL, FADE_S);
         store.dispatch.updateCurrentTime(0);
         players.stopAll(0);
     }

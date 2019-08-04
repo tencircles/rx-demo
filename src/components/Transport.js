@@ -10,7 +10,8 @@ export default props => {
     const currentTime   = useStoreState(prop(`currentTime`));
     const duration      = useStoreState(prop(`duration`));
     const playing       = useStoreState(prop(`playing`));
-    const onClick       = useCallback(pipe(Tone.start, togglePlaying), []);
+    const setAnimating  = useStoreActions(actions => actions.setAnimating);
+    const onClick       = useCallback(pipe(Tone.start, () => setAnimating(true), togglePlaying), []);
 
     return (
         <div className="transport">
