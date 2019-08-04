@@ -7,6 +7,8 @@ import store from "./store";
 import sound from "./sound";
 import {register} from "./serviceWorker";
 
+console.log(`Application Starting`);
+
 const root = document.getElementById(`root`);
 const jsx  = (
     <StoreProvider store={store}>
