@@ -23,9 +23,14 @@ const map   = {
     }, {})
 };
 
+const onload = () => {
+    console.log(`is ready`);
+    store.getActions().setReady();
+};
+
 map.vocals = VOCALS;
 
-const players = new Tone.Players(map).toMaster();
+const players = new Tone.Players(map, onload).toMaster();
 
 stems.forEach(key => {
     const player        = players.get(key);

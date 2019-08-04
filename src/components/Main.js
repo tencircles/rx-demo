@@ -9,6 +9,7 @@ export default props => {
     const play         = useStoreActions(actions => actions.togglePlaying);
     const setAnimating = useStoreActions(actions => actions.setAnimating);
     const playing      = useStoreState(state => state.playing);
+    const ready        = useStoreState(state => state.ready);
 
     const onClick = useCallback(() => {
         Tone.start();
@@ -22,7 +23,9 @@ export default props => {
     return (
         <div className="main">
             <Tracks />
-            <button onClick={onClick} className="randomize-btn"></button>
+            {
+                ready && <button onClick={onClick} className="randomize-btn"></button>
+            }
             <Transport />
         </div>
     );

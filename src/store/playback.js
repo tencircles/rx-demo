@@ -1,7 +1,11 @@
 import {action} from "easy-peasy";
 
 export default {
-    playing       : false,
+    playing  : false,
+    ready    : false,
+    setReady : action(state => {
+        state.ready = true;
+    }),
     togglePlaying : action(state => {
         state.playing = !state.playing;
         const allOff  = state.tracks.every(track => track.activeStem === 0);
