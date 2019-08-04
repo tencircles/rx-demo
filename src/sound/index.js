@@ -33,7 +33,7 @@ stems.forEach(key => {
     player.loop         = true;
 });
 
-players.vocals.loop = true;
+players.get(`vocals`).loop = true;
 
 const listen = (key, fn) =>
     store.subscribe(watch(store.getState, key, equals)(fn));
