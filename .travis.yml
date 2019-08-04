@@ -20,6 +20,6 @@ install:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/ $SSH_SERVER:$SSH_PROJECT_PATH
+  script: npm run build && rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/ $SSH_SERVER:$SSH_PROJECT_PATH
   on:
     branch: master
