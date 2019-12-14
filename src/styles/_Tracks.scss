@@ -94,8 +94,11 @@
             align-items: center;
             -webkit-scroll-snap-coordinate: 0% 0%;
             .stem-number {
+                position: relative;
+                left: -5px;
                 display: inline-block;
-                font-size: 5rem;
+                font-size: 4.5rem;
+                letter-spacing: -10px;
                 color: $primary-color;
                 font-family: $mono-font;
             }

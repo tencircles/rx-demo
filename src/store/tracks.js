@@ -1,6 +1,7 @@
 import {action} from "easy-peasy";
 import config from "../data/config";
 import uniqueRandom from "unique-random";
+import {numToString} from "../util";
 
 export default {
     activeTrack : -1,
@@ -10,10 +11,14 @@ export default {
             ({
                 name       : inst,
                 activeStem : 0,
-                stems      : Array(config.noStems + 1)
-                    .fill(0)
-                    .map(((x, stemNumber) =>
-                        stemNumber > 0 ? `${inst}-0${stemNumber}` : `off`))
+                stems      : (() => {
+                    const res = Array(config.noStems + 1)
+                        .fill(0)
+                        .map(((x, stemNumber) =>
+                            stemNumber > 0 ? `${inst}-${numToString(stemNumber)}` : `off`));
+
+                    return res;
+                })()
             }))
     ],
     setAnimating : action((state, isAnimating) => {

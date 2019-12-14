@@ -32,7 +32,7 @@
         "identity-obj-proxy": "3.0.0",
         "is-wsl": "^1.1.0",
         "mini-css-extract-plugin": "0.5.0",
-        "node-sass": "^4.12.0",
+        "node-sass": "^4.13.0",
         "nodemon": "^1.19.1",
         "optimize-css-assets-webpack-plugin": "5.0.1",
         "pnp-webpack-plugin": "1.2.1",
@@ -64,7 +64,8 @@
         "start": "node scripts/start.js",
         "build": "node scripts/build.js",
         "deploy": "rsync -rave 'ssh -i ~/.ssh/thetenthring.com/deploy_rsa' build/ root@165.227.17.140:/var/www/html/rxd",
-        "test": "exit 0"
+        "test": "exit 0",
+        "audio": "bash scripts/convert-audio.sh"
     },
     "browserslist": {
         "production": [

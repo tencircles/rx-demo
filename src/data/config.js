@@ -4,5 +4,5 @@ export default {
         `chords`,
         `melody`
     ],
-    noStems : 5
+    noStems : 10
 };

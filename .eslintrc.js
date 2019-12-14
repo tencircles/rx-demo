@@ -276,18 +276,6 @@ module.exports = {
         "no-lone-blocks": "error",
         "no-lonely-if": "error",
         "no-loop-func": "error",
-        "no-magic-numbers": [
-            "error",
-            {
-                "ignore": [
-                    -1,
-                    0,
-                    1,
-                    1000,
-                    60
-                ]
-            }
-        ],
         "no-mixed-operators": "off",
         "no-mixed-requires": "error",
         "no-mixed-spaces-and-tabs": "error",

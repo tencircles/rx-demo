@@ -2,10 +2,11 @@ import Tone from "tone";
 import store from "../store/index";
 import {equals} from "ramda";
 import watch from "redux-watch";
+import {numToString} from "../util";
 
-const VOCALS     = `${process.env.PUBLIC_URL}/audio/vocals1.mp3`;
+const VOCALS     = `${process.env.PUBLIC_URL}/audio/vocals.mp3`;
 const MIN_VOL    = -96;
-const MAX_VOL    = 0;
+const MAX_VOL    = -6;
 const FADE_S     = 1;
 const FADE_DELAY = 0.1;
 
@@ -46,10 +47,16 @@ const listen = (key, fn) =>
 store.getState().tracks.forEach((track, i) => {
     listen(`tracks.${i}.activeStem`, (value, oldValue) => {
         if (oldValue !== 0) {
-            players.get(`${track.name}-0${oldValue}`).volume.rampTo(MIN_VOL, FADE_S, Tone.now() + FADE_DELAY);
+            let playingTrack = `${track.name}-${numToString(oldValue)}`;
+            players.get(playingTrack).volume.rampTo(MIN_VOL, FADE_S, Tone.now() + FADE_DELAY);
         }
         if (value !== 0) {
-            players.get(`${track.name}-0${value}`).volume.rampTo(MAX_VOL, FADE_S);
+            let vol = MAX_VOL;
+            if (value > 5) {
+                vol -= 3;
+            }
+            let playingTrack = `${track.name}-${numToString(value)}`;
+            players.get(playingTrack).volume.rampTo(vol, FADE_S);
         }
     });
 });
